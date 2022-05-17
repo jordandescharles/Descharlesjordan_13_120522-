@@ -8,11 +8,10 @@ function Form() {
   const [formData, setFormData] = useState({
     email:'',
     password:'',
-    stayLogged:'',
   });
 
   //desconstructed to be more efficient and easy to use 
-  const {email,password,stayLogged} = formData;
+  const {email,password} = formData;
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -49,11 +48,11 @@ function Form() {
       email,
       password,
     }
-    const checked ={
-      stayLogged,
-    }
+
     dispatch(login(userData,checked))
   }
+
+  const checked = 12
 
   if(isLoading){
     return "chargement"
