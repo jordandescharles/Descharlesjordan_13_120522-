@@ -1,19 +1,63 @@
-import { useRef,useState,useEffect} from "react";
-
-
-
+import { useState,useEffect} from "react";
+import {useSelector, useDispatch} from 'react-redux';
+import {useNavigate} from 'react-router-dom';
+import {toast} from 'react-toastify'
+import {login, reset} from '../features/auth/authSlice'
 
 function Form() {
-  const userRef = useRef();
-  const errRef = useRef(); // for accessibility if error
+  const [formData, setFormData] = useState({
+    email:'',
+    password:'',
+    stayLogged:'',
+  });
 
-  const [user, setUser] = useState('');
-  const [validName, setValidName]  = useState(false);
-  const [userFocus, setUserFocus]  = useState(false);
+  //desconstructed to be more efficient and easy to use 
+  const {email,password,stayLogged} = formData;
 
-  const [pwd, setPwd] = useState('');
-  const [validPwd, setValidPwd]  = useState(false);
-  const [pwdFocus, setPwdFocus]  = useState(false);
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const {user,isLoading,isError, isSuccess, message} = useSelector(
+    (state) => state.auth
+    
+  )
+ 
+  useEffect(() => {
+    if(isError){
+      toast.error(message)
+    }
+    if(isSuccess || user){
+      navigate('/user')
+
+    }
+    dispatch (reset())
+
+  },[user,isError, isSuccess, message,navigate,dispatch])
+
+ //allows to make changes on form with react 
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name] : e.target.value,
+    }) )
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+
+    const userData = {
+      email,
+      password,
+    }
+    const checked ={
+      stayLogged,
+    }
+    dispatch(login(userData,checked))
+  }
+
+  if(isLoading){
+    return "chargement"
+  }
   
     return (
         <>
@@ -21,20 +65,20 @@ function Form() {
       <section className="sign-in-content">
         <i className="fa fa-user-circle sign-in-icon"></i>
         <h1>Sign In</h1>
-        <form>
+        <form onSubmit={onSubmit}>
           <div className="input-wrapper">
             <label htmlFor="username">Username</label>
-            <input type="text" id="username" />
+            <input name="email" type="text" id="username" value={email} onChange={onChange} />
           </div>
           <div className="input-wrapper">
             <label htmlFor="password">Password</label>
-            <input type="password" id="password" />
+            <input name="password" type="password" id="password" value={password} onChange={onChange} />
           </div>
           <div className="input-remember">
-            <input type="checkbox" id="remember-me" /><label htmlFor="remember-me">Remember me</label>
+            <input name="stayLogged" type="checkbox" id="remember-me" /><label htmlFor="remember-me">Remember me</label>
           </div>
 
-           <button className="sign-in-button">Sign In</button> 
+           <button className="sign-in-button" type="submit"  >Sign In</button> 
          
         </form>
       </section>
