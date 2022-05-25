@@ -1,66 +1,64 @@
-import { useState,useEffect} from "react";
-import {useSelector, useDispatch} from 'react-redux';
-import {useNavigate} from 'react-router-dom';
-import {toast} from 'react-toastify'
-import {login, reset} from '../features/auth/authSlice'
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { login, reset,rememberToken,getDatas } from '../features/auth/authSlice'
+import Checkbox from "./Checkbox";
 
 function Form() {
+
+  //define Formdata State
   const [formData, setFormData] = useState({
-    email:'',
-    password:'',
-  });
+    email: '',
+    password: '',
+  })
+
+  //allows to make changes on form with react 
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }))
+    
+  }
 
   //desconstructed to be more efficient and easy to use 
-  const {email,password} = formData;
+  const { email, password } = formData
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const {user,isLoading,isError, isSuccess, message} = useSelector(
+  // extract Data from from the storestate
+  const { user, isLoading, isError, isSuccess } = useSelector(
     (state) => state.auth
-    
   )
- 
-  useEffect(() => {
-    if(isError){
-      toast.error(message)
-    }
-    if(isSuccess || user){
-      navigate('/user')
 
-    }
-    dispatch (reset())
-
-  },[user,isError, isSuccess, message,navigate,dispatch])
-
- //allows to make changes on form with react 
-  const onChange = (e) => {
-    setFormData((prevState) => ({
-      ...prevState,
-      [e.target.name] : e.target.value,
-    }) )
-  }
-
+  // on SUBMIT dispatch datat to login
   const onSubmit = (e) => {
     e.preventDefault()
-
     const userData = {
       email,
       password,
     }
-
-    dispatch(login(userData,checked))
+    dispatch(login(userData))
   }
 
-  const checked = 12
+  // if OK then navigate to profil page else reset datas
+  useEffect(() => {
+    if (isSuccess || user) {
+      dispatch(rememberToken())
+      dispatch(getDatas())
+      navigate('/profil')
+    }
+    if (isError) {
+      dispatch(reset())
+    }
+  })
 
-  if(isLoading){
-    return "chargement"
+  if (isLoading) {
+    return <h1>Chargement</h1>
   }
-  
-    return (
-        <>
-
+  return (
+    <>
       <section className="sign-in-content">
         <i className="fa fa-user-circle sign-in-icon"></i>
         <h1>Sign In</h1>
@@ -74,16 +72,13 @@ function Form() {
             <input name="password" type="password" id="password" value={password} onChange={onChange} />
           </div>
           <div className="input-remember">
-            <input name="stayLogged" type="checkbox" id="remember-me" /><label htmlFor="remember-me">Remember me</label>
+            <Checkbox id="remember-me" label=" Remember me" />
           </div>
-
-           <button className="sign-in-button" type="submit"  >Sign In</button> 
-         
+          <button className="sign-in-button" type="submit" >Sign In</button>
         </form>
       </section>
-        </>
-       
-    );
+    </>
+  );
 }
 
 export default Form;
