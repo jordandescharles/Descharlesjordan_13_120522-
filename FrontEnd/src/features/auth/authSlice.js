@@ -80,21 +80,6 @@ export const isChecked = createAsyncThunk(
     }
 )
 
-//rememberToken
-export const rememberToken = createAsyncThunk(
-    'auth/rememberToken ',
-    async () => {
-        await authService.rememberToken ()
-    }
-)
-//getDatas 
-export const getDatas = createAsyncThunk(
-    'auth/getDatas ',
-    async () => {
-        await authService.getDatas ()
-    }
-)
-
 
 export const { reset } = authSlice.actions
 export default authSlice.reducer

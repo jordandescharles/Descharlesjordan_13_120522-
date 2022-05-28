@@ -1,8 +1,7 @@
 import Footer from '../components/Footer';
 import Form from "../components/Form";
 import Nav from '../components/Nav';
-import {ToastContainer} from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
+
 
 
 function Login() {
@@ -14,7 +13,6 @@ function Login() {
             <Form />
             </main>
             <Footer />
-            <ToastContainer />
         </>
        
     );

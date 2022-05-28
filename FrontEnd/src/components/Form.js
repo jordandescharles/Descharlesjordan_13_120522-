@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { login, reset,rememberToken,getDatas } from '../features/auth/authSlice'
+import { login, reset} from '../features/auth/authSlice'
+import { rememberToken} from '../features/auth/userSlice'
 import Checkbox from "./Checkbox";
+
 
 function Form() {
 
@@ -17,8 +19,7 @@ function Form() {
     setFormData((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
-    }))
-    
+    })) 
   }
 
   //desconstructed to be more efficient and easy to use 
@@ -46,7 +47,6 @@ function Form() {
   useEffect(() => {
     if (isSuccess || user) {
       dispatch(rememberToken())
-      dispatch(getDatas())
       navigate('/profil')
     }
     if (isError) {

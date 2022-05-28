@@ -32,7 +32,6 @@ function Nav() {
                     <i className="fa fa-user-circle"></i>
                     Sign  Out
                 </button > 
-               
                 ) : (
                     <Link to="/login" className="main-nav-item" >
                     <i className="fa fa-user-circle"></i>

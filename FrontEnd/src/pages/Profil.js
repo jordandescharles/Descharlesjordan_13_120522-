@@ -1,30 +1,37 @@
 import React from 'react';
 import Footer from '../components/Footer';
 import Nav from '../components/Nav';
+import {  useDispatch } from 'react-redux';
+import { getToken } from '../features/auth/userSlice';
+import NameUpdater from '../components/NameUpdater';
+import {getDatas} from '../features/auth/userSlice'
 
 
 function User() {
+    const token = getToken()
+    const dispatch = useDispatch()
 
-    const user = JSON.parse(localStorage.getItem('user'))
-    if(user === null){
-
-    return(
-        <>
-        <Nav />
-        <main className="main bg-dark">
-            <h1 className='error-h1'>ERROR you must be logged</h1>
-            </main>
-        <Footer />
-        </>
+    if (token === null) {
+        return (
+            <>
+                <Nav />
+                <main className="main bg-dark">
+                    <h1 className='error-h1'>ERROR you must be logged</h1>
+                </main>
+                <Footer />
+            </>
         )
     }
+
+    dispatch(getDatas())
     return (
         <>
             <Nav />
             <main className="main bg-dark">
                 <div className="header">
-                    <h1>Welcome back<br />Tony Jarvis!</h1>
-                    <button className="edit-button">Edit Name</button>
+                    <h1>Welcome back
+                    </h1>
+                    <NameUpdater />
                 </div>
                 <h2 className="sr-only">Accounts</h2>
                 <section className="account">
@@ -54,9 +61,10 @@ function User() {
                         <p className="account-amount-description">Current Balance</p>
                     </div>
                     <div className="account-content-wrapper cta">
-                        <button className="transaction-button">View transactions</button>
+                        <button className="transaction-button" >View transactions</button>
                     </div>
                 </section>
+               
             </main>
             <Footer />
         </>
