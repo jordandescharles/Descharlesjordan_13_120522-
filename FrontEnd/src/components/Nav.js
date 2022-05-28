@@ -34,13 +34,13 @@ function Nav() {
             <div>
                 {token ? (
                     <>
-                        <span className="main-nav-item" >
+                        <span className="main-nav-item-user" >
                             <i className="fa fa-user-circle"></i>
                             <strong>{firstName}</strong>
                         </span >
 
                         <span className="main-nav-item" onClick={onLogout}>
-                            <i class="fa fa-sign-out"></i>
+                            <i className="fa fa-sign-out"></i>
                             <strong>Sign Out</strong>
                         </span >
                     </>
