@@ -10,7 +10,7 @@ var token = {
 var checkedBtn = false
 
 //Axios PARAMS
-const bodyParameters = {};
+const bodyParameters = {key:"value"};
 const API_URL_LOGIN = 'http://localhost:3001/api/v1/user/login'
 const API_URL_DATA = 'http://localhost:3001/api/v1/user/profile'
 const config = { headers: { Authorization: `Bearer ${getToken()}` } };

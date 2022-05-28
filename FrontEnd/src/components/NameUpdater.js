@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector,useDispatch } from 'react-redux';
-import { useState } from 'react'
+import { useState,useEffect} from 'react'
 import { updateUserData } from '../features/auth/authService';
 import { getDatas} from '../features/auth/userSlice'
 
@@ -8,7 +8,7 @@ import { getDatas} from '../features/auth/userSlice'
 function NameUpdater() {
     const dispatch = useDispatch()
 
-    const {firstName,lastName} = useSelector((state) => state.user)
+    const {firstName,lastName} = useSelector((state) => state.user) 
     const [updating, setUpdating] = useState(false)
 
     const toggleUpdater = () => {
@@ -60,7 +60,8 @@ function NameUpdater() {
                                 <input name="lastN" type="text" id="lastN" value={lastN} onChange={onChange} placeholder={lastName} />
                             </div>
 
-                            <button className="sign-in-button" type="submit" >Sign In</button>
+                            <button className="edit-button" type="submit" >Save</button>
+                            <button className="edit-button" onClick={toggleUpdater} >Cancel</button>
                         </form>
                     </>
                 )

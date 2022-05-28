@@ -1,16 +1,13 @@
 import React from 'react';
 import Footer from '../components/Footer';
 import Nav from '../components/Nav';
-import {  useDispatch } from 'react-redux';
 import { getToken } from '../features/auth/userSlice';
 import NameUpdater from '../components/NameUpdater';
-import {getDatas} from '../features/auth/userSlice'
 
 
 function User() {
     const token = getToken()
-    const dispatch = useDispatch()
-
+    
     if (token === null) {
         return (
             <>
@@ -23,7 +20,6 @@ function User() {
         )
     }
 
-    dispatch(getDatas())
     return (
         <>
             <Nav />

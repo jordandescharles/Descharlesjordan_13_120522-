@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { login, reset} from '../features/auth/authSlice'
-import { rememberToken} from '../features/auth/userSlice'
+import { rememberToken,getDatas} from '../features/auth/userSlice'
 import Checkbox from "./Checkbox";
 
 
@@ -47,7 +47,9 @@ function Form() {
   useEffect(() => {
     if (isSuccess || user) {
       dispatch(rememberToken())
+      dispatch(getDatas())
       navigate('/profil')
+      
     }
     if (isError) {
       dispatch(reset())

@@ -39,6 +39,15 @@ export const userSlice = createSlice({
             state.lastName = action.payload.lastName
             state.fetchedData = true
         })
+        .addCase(updateUserData.pending, (state) => {
+            state.loadingUser = true
+        })
+        .addCase(updateUserData.fulfilled, (state, action) => {
+            state.loadingUser = false
+            state.userDataError = false;
+            state.firstName = action.payload.firstName
+            state.lastName = action.payload.lastName
+        })
     
         .addCase(logout.fulfilled, (state) => {
             state.fetchedData = false
@@ -54,7 +63,7 @@ export const userSlice = createSlice({
 
 //rememberToken
 export const rememberToken = createAsyncThunk(
-    'user/rememberToken ',
+    'user/rememberToken',
     async () => {
         await authService.rememberToken()
     }
@@ -66,7 +75,7 @@ export const getToken = () => {
 }
 // getDatas 
 export const getDatas = createAsyncThunk(
-    'user/getDatas ',
+    'user/getDatas',
     async () => {
         await authService.getDatas()
             .then((res) => {userInfo = res.data.body} )
@@ -76,7 +85,7 @@ export const getDatas = createAsyncThunk(
 
 // getDatas 
 export const updateUserData = createAsyncThunk(
-    'user/getDatas ',
+    'user/updateUserData',
     async () => {
         await authService.updateUserData()
             .then((res) => {newName = res.data.body} )
