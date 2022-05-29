@@ -213,7 +213,7 @@ h1{margin-bottom: 0;}
   gap: 10px;
 }
 .input-wrapper-updater input{
-  height: 5vw;
+  height: 30px;
   margin: 15px 0 10px 0;
 }
 
@@ -318,5 +318,27 @@ h1{margin-bottom: 0;}
 
   .transaction-button {
     width: 200px;
+  }
+
+}
+@media (max-width: 480px) {
+  .main-nav-item {
+    font-size: 11pt;
+  }
+  .main-nav-item-user {
+    font-size: 11pt;
+  }
+  .main-nav-logo{
+    width: 120px;
+  }
+  .input-wrapper-updater{
+    flex-direction: column;
+    margin:  0 auto;
+    width: 60vw;
+    align-items: center;
+  }
+  .input-wrapper-updater input:last-child{
+    margin: 0px auto 10px auto;
+
   }
 }

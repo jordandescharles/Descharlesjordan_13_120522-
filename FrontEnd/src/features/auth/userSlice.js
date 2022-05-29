@@ -10,10 +10,10 @@ const initialState = {
     loadingUser: false,
     userDataError: false,
     fetchedData: false,
-    email: null,
-    firstName: null,
-    id: null,
-    lastName: null,
+    email: "",
+    firstName: "",
+    id: "",
+    lastName: "",
 }
 
 export const userSlice = createSlice({

@@ -4,6 +4,7 @@ import Nav from '../components/Nav';
 import { getToken } from '../features/auth/userSlice';
 import NameUpdater from '../components/NameUpdater';
 
+
 function User() {
     const token = getToken()
 

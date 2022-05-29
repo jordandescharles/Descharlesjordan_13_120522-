@@ -68,7 +68,7 @@ export const login = createAsyncThunk(
 // Logout
 export const logout = createAsyncThunk(
     'auth/logout',
-    async (checked) => {
+    async () => {
         await authService.logout()
     }
 )
@@ -79,6 +79,7 @@ export const isChecked = createAsyncThunk(
         await authService.isChecked()
     }
 )
+
 
 export const { reset } = authSlice.actions
 export default authSlice.reducer

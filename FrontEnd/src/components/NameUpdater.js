@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector,useDispatch } from 'react-redux';
-import { useState,useEffect} from 'react'
+import { useState} from 'react'
 import { updateUserData } from '../features/auth/authService';
 import { getDatas} from '../features/auth/userSlice'
 
@@ -56,8 +56,8 @@ function NameUpdater() {
                     <>
                         <form onSubmit={onSubmit} >
                             <div className="input-wrapper-updater">
-                                <input name="firstN" type="text" id="firstN" value={firstN} onChange={onChange} placeholder={firstName} />
-                                <input name="lastN" type="text" id="lastN" value={lastN} onChange={onChange} placeholder={lastName} />
+                                <input name="firstN" type="text" id="firstN" value={firstN} onChange={onChange} placeholder={firstName} required minLength={2}/>
+                                <input name="lastN" type="text" id="lastN" value={lastN} onChange={onChange} placeholder={lastName} required minLength={2}/>
                             </div>
 
                             <button className="edit-button" type="submit" >Save</button>

@@ -1,28 +1,33 @@
 import axios from "axios";
-import { getToken } from "./userSlice";
-
-var token = {
-    body: {
-        token: ''
-    }
-}
+//import { getToken } from "./userSlice";
 
 var checkedBtn = false
 
 //Axios PARAMS
-const bodyParameters = {key:"value"};
+const bodyParameters = {  
+    email: "",
+    firstName: "",
+    lastName: "",
+    createdAt: "",
+    updatedAt: "",
+    id: ""}
+
 const API_URL_LOGIN = 'http://localhost:3001/api/v1/user/login'
 const API_URL_DATA = 'http://localhost:3001/api/v1/user/profile'
-const config = { headers: { Authorization: `Bearer ${getToken()}` } };
+var config = {};
 
 // login User
 const login = async (userData) => {
     const res = await axios.post(API_URL_LOGIN, userData)
+    .catch( error =>{
+        alert(error.response.data.message)
+    })
     if (res.data) {
-        token = res.data.body.token
-        localStorage.setItem('token', token)
+        var token = res.data.body.token
+        localStorage.setItem('token', token)}  
+        config = { headers: { Authorization: `Bearer ${token}` }
     }
-    return token
+       
 }
 
 // logout User, remouves the token
@@ -45,7 +50,7 @@ const isChecked = async () => {
 // can be usefull if there is a token with a longer lifetime
 const rememberToken = async () => {
     if (checkedBtn) {
-        localStorage.setItem("token", token)
+       // localStorage.setItem("token", )
     }
 }
 
