@@ -4,10 +4,9 @@ import Nav from '../components/Nav';
 import { getToken } from '../features/auth/userSlice';
 import NameUpdater from '../components/NameUpdater';
 
-
 function User() {
     const token = getToken()
-    
+
     if (token === null) {
         return (
             <>
@@ -19,7 +18,6 @@ function User() {
             </>
         )
     }
-
     return (
         <>
             <Nav />
@@ -60,7 +58,6 @@ function User() {
                         <button className="transaction-button" >View transactions</button>
                     </div>
                 </section>
-               
             </main>
             <Footer />
         </>

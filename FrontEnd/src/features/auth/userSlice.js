@@ -60,7 +60,6 @@ export const userSlice = createSlice({
     }
 })
 
-
 //rememberToken
 export const rememberToken = createAsyncThunk(
     'user/rememberToken',
@@ -68,11 +67,13 @@ export const rememberToken = createAsyncThunk(
         await authService.rememberToken()
     }
 )
+
 // function to acces token everywhere
 export const getToken = () => {
     const token = localStorage.getItem('token')
     return token
 }
+
 // getDatas 
 export const getDatas = createAsyncThunk(
     'user/getDatas',
@@ -92,7 +93,5 @@ export const updateUserData = createAsyncThunk(
         return newName
     }
 )
-
-
 
 export default userSlice.reducer

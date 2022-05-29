@@ -56,7 +56,6 @@ export const updateUserData = (
             firstName: userData.firstN,
             lastName: userData.lastN
             }
-
         axios
             .put(
                 API_URL_DATA, 
