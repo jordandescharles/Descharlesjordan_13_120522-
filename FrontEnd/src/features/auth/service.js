@@ -77,7 +77,7 @@ export const updateUserData = (
         }
 )
 
-const authService = {
+const service = {
     updateUserData,
     isChecked,
     rememberToken,
@@ -85,4 +85,4 @@ const authService = {
     login,
     logout
 }
-export default authService
+export default service

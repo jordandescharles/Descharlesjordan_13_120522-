@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import authService from "./authService";
+import service from "./service";
 import { logout } from "./authSlice";
 
 var userInfo;
@@ -64,7 +64,7 @@ export const userSlice = createSlice({
 export const rememberToken = createAsyncThunk(
     'user/rememberToken',
     async () => {
-        await authService.rememberToken()
+        await service.rememberToken()
     }
 )
 
@@ -78,7 +78,7 @@ export const getToken = () => {
 export const getDatas = createAsyncThunk(
     'user/getDatas',
     async () => {
-        await authService.getDatas()
+        await service.getDatas()
             .then((res) => {userInfo = res.data.body} )
         return userInfo
     }
@@ -88,7 +88,7 @@ export const getDatas = createAsyncThunk(
 export const updateUserData = createAsyncThunk(
     'user/updateUserData',
     async () => {
-        await authService.updateUserData()
+        await service.updateUserData()
             .then((res) => {newName = res.data.body} )
         return newName
     }

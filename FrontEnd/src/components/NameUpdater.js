@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import { useState} from 'react'
-import { updateUserData } from '../features/auth/authService';
+import { updateUserData } from '../features/auth/service';
 import { getDatas} from '../features/auth/userSlice'
 
 
