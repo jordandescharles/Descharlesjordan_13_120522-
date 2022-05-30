@@ -1,7 +1,4 @@
 import axios from "axios";
-//import { getToken } from "./userSlice";
-
-var checkedBtn = false
 
 //Axios PARAMS
 const bodyParameters = {  
@@ -10,11 +7,11 @@ const bodyParameters = {
     lastName: "",
     createdAt: "",
     updatedAt: "",
-    id: ""}
+    id: "" }
 
 const API_URL_LOGIN = 'http://localhost:3001/api/v1/user/login'
 const API_URL_DATA = 'http://localhost:3001/api/v1/user/profile'
-var config = {};
+axios.defaults.headers.common['Authorization']= `Bearer ${localStorage.token}`
 
 // login User
 const login = async (userData) => {
@@ -25,9 +22,7 @@ const login = async (userData) => {
     if (res.data) {
         var token = res.data.body.token
         localStorage.setItem('token', token)}  
-        config = { headers: { Authorization: `Bearer ${token}` }
-    }
-       
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`     
 }
 
 // logout User, remouves the token
@@ -37,15 +32,15 @@ const logout = async () => {
 
 // get Data User
 const getDatas = async () => {
-    const res = await axios.post(API_URL_DATA, bodyParameters, config)
+    const res = await axios.post(API_URL_DATA, bodyParameters)
     return res
 }
 
+var checkedBtn = false
 //is checked
 const isChecked = async () => {
     checkedBtn = !checkedBtn
 }
-
 // Set the token inside the LOCALSTORAGE
 // can be usefull if there is a token with a longer lifetime
 const rememberToken = async () => {
@@ -62,15 +57,7 @@ export const updateUserData = (
             lastName: userData.lastN
             }
         axios
-            .put(
-                API_URL_DATA, 
-                body,
-                config,
-                {
-                    firstName: userData.firstN,
-                    lastName: userData.lastN
-                    }
-            )
+            .put(API_URL_DATA, body)
             .catch((error) => {
                 console.log(error);
                })

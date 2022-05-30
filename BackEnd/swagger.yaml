@@ -272,7 +272,6 @@ definitions:
         type: string
 
   UserTransaction:
-
     type: object
     properties:
       id:

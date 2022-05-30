@@ -80,6 +80,5 @@ export const isChecked = createAsyncThunk(
     }
 )
 
-
 export const { reset } = authSlice.actions
 export default authSlice.reducer

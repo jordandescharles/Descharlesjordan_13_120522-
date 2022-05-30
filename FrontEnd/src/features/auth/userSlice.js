@@ -84,7 +84,7 @@ export const getDatas = createAsyncThunk(
     }
 )
 
-// getDatas 
+// updateDatas 
 export const updateUserData = createAsyncThunk(
     'user/updateUserData',
     async () => {
