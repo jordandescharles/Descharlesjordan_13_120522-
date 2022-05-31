@@ -47,9 +47,7 @@ function Form() {
   useEffect(() => {
     if (isSuccess || user) {
       dispatch(rememberToken())
-      dispatch(getDatas())
       navigate('/profil')
-      
     }
     if (isError) {
       dispatch(reset())
