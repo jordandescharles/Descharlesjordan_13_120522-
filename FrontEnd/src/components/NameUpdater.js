@@ -36,7 +36,7 @@ function NameUpdater() {
         }))
     }
 
-    // on SUBMIT dispatch datat to login
+    // on SUBMIT dispatch datas
     const onSubmit = (e) => {
         e.preventDefault()
         const userData = {

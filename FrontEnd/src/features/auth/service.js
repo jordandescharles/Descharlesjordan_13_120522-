@@ -1,13 +1,6 @@
 import axios from "axios";
 
 //Axios PARAMS
-const bodyParameters = {  
-    email: "",
-    firstName: "",
-    lastName: "",
-    createdAt: "",
-    updatedAt: "",
-    id: "" }
 
 const API_URL_LOGIN = 'http://localhost:3001/api/v1/user/login'
 const API_URL_DATA = 'http://localhost:3001/api/v1/user/profile'
@@ -32,7 +25,7 @@ const logout = async () => {
 
 // get Data User
 const getDatas = async () => {
-    const res = await axios.post(API_URL_DATA, bodyParameters)
+    const res = await axios.post(API_URL_DATA)
     return res
 }
 
@@ -41,6 +34,7 @@ var checkedBtn = false
 const isChecked = async () => {
     checkedBtn = !checkedBtn
 }
+
 // Set the token inside the LOCALSTORAGE
 // can be usefull if there is a token with a longer lifetime
 const rememberToken = async () => {
