@@ -130,6 +130,16 @@ paths:
           description: Attach Bearer JWT token
           required: true
           type: string
+        - in: header
+          name: dateStart
+          description: begining of the research
+          required: false
+          type: string
+        - in: header
+          name: dateEnd
+          description: end of the research 
+          required: false
+          type: string
       produces:
         - application/json
       responses:
