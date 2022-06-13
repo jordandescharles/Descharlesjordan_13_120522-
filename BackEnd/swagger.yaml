@@ -182,6 +182,43 @@ paths:
           description: Unauthorized
         "500":
           description: Internal Server Error
+    post:
+      security:
+        - Bearer: []
+      tags:
+        - Single transaction
+      summary: User Single Transaction API
+      description: API to update a user transaction
+      parameters:
+        - in: path
+          name: transactionId
+          description: ID of transaction 
+          required: true
+          type: string
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Update selected transaction
+          required: true
+          schema:
+            $ref: "#/definitions/UserEditTransaction"
+      produces:
+        - application/json
+      responses:
+        "200":
+          description: User transaction modified successfully
+          schema:
+            $ref: "#/definitions/UserTransaction"
+        "400":
+          description: Invalid Fields
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal Server Error
     put:
       security:
         - Bearer: []
